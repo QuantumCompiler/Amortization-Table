@@ -27,19 +27,19 @@ void Calculate(double annualRate, double loanAmount, int totalMonths) {
   List<double> total_payments = [];
   List<double> total_interest = [];
   List<double> total_principal = [];
-  print('Month: 0, Loan Left: \$${roundDollar(remaining_loan_amount, 2)}, Principal Paid: \$${roundDollar(monthly_principal_amount, 2)}, Interest Paid: \$${roundDollar(monthly_interest_amount, 2)}, Total Payment: \$${roundDollar(0, 2)}');
+  print('Month: 0, Loan Left: \$${RoundDollar(remaining_loan_amount, 2)}, Principal Paid: \$${RoundDollar(monthly_principal_amount, 2)}, Interest Paid: \$${RoundDollar(monthly_interest_amount, 2)}, Total Payment: \$${RoundDollar(0, 2)}');
   for (int i = 1; i <= totalMonths; i++) {
     monthly_interest_amount = remaining_loan_amount * monthly_effective_interest;
     monthly_principal_amount = monthly_payment - monthly_interest_amount;
     remaining_loan_amount -= monthly_principal_amount;
-    total_payments.add(roundDollar(monthly_payment, 2));
-    total_interest.add(roundDollar(monthly_interest_amount, 2));
-    total_principal.add(roundDollar(monthly_principal_amount, 2));
-    print('Month: $i, Loan Left: \$${roundDollar(remaining_loan_amount, 2)}, Principal Paid: \$${roundDollar(monthly_principal_amount, 2)}, Interest Paid: \$${roundDollar(monthly_interest_amount, 2)}, Monthly Payment: \$${roundDollar(monthly_payment, 2)}');
+    total_payments.add(RoundDollar(monthly_payment, 2));
+    total_interest.add(RoundDollar(monthly_interest_amount, 2));
+    total_principal.add(RoundDollar(monthly_principal_amount, 2));
+    print('Month: $i, Loan Left: \$${RoundDollar(remaining_loan_amount, 2)}, Principal Paid: \$${RoundDollar(monthly_principal_amount, 2)}, Interest Paid: \$${RoundDollar(monthly_interest_amount, 2)}, Monthly Payment: \$${RoundDollar(monthly_payment, 2)}');
   }
-  double final_payments = roundDollar(total_payments.fold(0, (previousValue, element) => previousValue + element), 2);
-  double final_interest = roundDollar(total_interest.fold(0, (previousValue, element) => previousValue + element), 2);
-  double final_principal = roundDollar(total_principal.fold(0, (previousValue, element) => previousValue + element), 2);
+  double final_payments = RoundDollar(total_payments.fold(0, (previousValue, element) => previousValue + element), 2);
+  double final_interest = RoundDollar(total_interest.fold(0, (previousValue, element) => previousValue + element), 2);
+  double final_principal = RoundDollar(total_principal.fold(0, (previousValue, element) => previousValue + element), 2);
   print('Total Principal Paid: \$${final_principal} , Total Interest Paid: \$${final_interest} , Total Paid: \$${final_payments}');
 }
 
@@ -69,7 +69,7 @@ double MonthlyRate(double annualRate) {
   return pow(1 + (annualRate / 100), 1.0 / 12.0) - 1.0;
 }
 
-/*  roundDollar - Rounds a currency to two decimal places
+/*  RoundDollar - Rounds a currency to two decimal places
     Input:
       value - Double that is to be rounded
       places - Integer for the total number of decimal places that a value is to be rounded to
@@ -78,7 +78,7 @@ double MonthlyRate(double annualRate) {
     Output:
       This function returns the rounded value to the desired number of decimal places
 */
-double roundDollar(double value, int places) {
+double RoundDollar(double value, int places) {
   double mod = pow(10.0, places).toDouble();
   return ((value * mod).round().toDouble() / mod);
 }
